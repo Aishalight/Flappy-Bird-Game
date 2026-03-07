@@ -1,31 +1,11 @@
-# Flappy-Bird-Game 🐦
+# [Flappy Bird](https://youtu.be/jj5ADM2uywg)
+- Coding Tutorial: https://youtu.be/jj5ADM2uywg
+- Demo: https://imkennyyip.github.io/flappy-bird/
+- Learn how to add music/sounds: https://youtu.be/UQA5jG-yh78
+- Learn how to add animations: https://youtu.be/94Vw8teCElM
 
-A high-fidelity, retro-style recreation of the classic Flappy Bird, built entirely with **HTML5 Canvas**, **CSS3**, and **Vanilla JavaScript**. This version features smooth animations, persistent high scores, and responsive controls for both desktop and mobile.
+In this tutorial, you will learn to create the flappy bird game with html, css, and javascript. Specifically, you will learn how to code the game using html5 canvas. 
 
+Throughout the tutorial, you will learn how to create the game loop, add images onto the canvas, add click handlers to make the flappy bird jump, randomly generate pipes and move them across the screen, detect collisions between the flappy bird and each pipe, and add a running score. 
 
-
-## 🎮 Features
-* **Frame-by-Frame Animation:** A custom 4-frame sprite animation system for the bird's flight.
-* **Persistent High Score:** Uses `localStorage` to save your best score even if you refresh the browser.
-* **Retro UI:** Integrated "Press Start 2P" Google Font for that authentic 8-bit arcade feel.
-* **Collision Freeze:** The game "freezes" on impact, allowing you to see exactly where you hit the pipe before the Game Over screen appears.
-* **Dynamic Audio:** Includes background music (BGM), wing flap sounds, hit effects, and falling sounds.
-
-## 🕹️ How to Play
-* **Desktop:** Press the **Spacebar**, **Arrow Up**, or **X** key to flap your wings.
-* **Mobile:** Simply **Tap** the screen to jump.
-* **Goal:** Navigate between the pipes without touching them or hitting the ground. Every pair of pipes passed earns you 1 point.
-
-## 🛠️ Technical Details
-* **Engine:** Custom `requestAnimationFrame` game loop running at 60 FPS.
-* **Physics:** Simplified AABB (Axis-Aligned Bounding Box) collision detection.
-* **State Management:** Distinct game states for `Menu`, `Playing`, and `GameOver`.
-
-
-
-### 🗂️ Project Structure
-```text
-├── index.html      # Game structure and Canvas element
-├── flappybird.css  # Styling and retro menu positioning
-├── flappybird.js   # Main game logic, physics, and rendering
-└── assets         # Bird&pipe images, and SFX
+![flappy-bird-sample](https://user-images.githubusercontent.com/78777681/219966636-72584cb3-d471-41c0-872f-62c230dccc47.png)

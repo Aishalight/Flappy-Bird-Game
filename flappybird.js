@@ -179,9 +179,13 @@ function triggerGameOver() {
         hitSound.play();
         dieSound.play();
         bgm.pause();
-        if (Math.floor(score) > bestScore) {
-            bestScore = Math.floor(score);
-            localStorage.setItem("bestScore", bestScore);
+
+        let currentSessionScore = Math.floor(score);
+        
+        // Use a strict check to ensure we are comparing numbers
+        if (currentSessionScore > bestScore) {
+            bestScore = currentSessionScore; // Update the global variable IMMEDIATELY
+            localStorage.setItem("bestScore", bestScore); // Save to GitHub Pages domain storage
         }
     }
 }
@@ -216,11 +220,12 @@ function placePipes() {
 function drawScore() {
     context.fillStyle = "white";
     context.font = "20px 'Press Start 2P', cursive";
+    context.textAlign = "left"; // Ensure alignment is correct
     
     // Current Score
     context.fillText(Math.floor(score), 20, 45);
     
-    // Best Score (added this)
+    // Best Score - pulling the most recent value
     context.font = "12px 'Press Start 2P', cursive";
     context.fillText("BEST: " + bestScore, 20, 75);
 }
@@ -280,3 +285,4 @@ function detectedCollision(a, b) {
            a.y < b.y + b.height &&
            a.y + a.height > b.y;
 }
+

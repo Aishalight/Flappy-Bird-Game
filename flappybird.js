@@ -218,56 +218,40 @@ function placePipes() {
 }
 
 function drawScore() {
+    context.save(); // Save the current state
     context.fillStyle = "white";
     context.font = "20px 'Press Start 2P', cursive";
-    context.textAlign = "left"; // Ensure alignment is correct
+    context.textAlign = "left"; // FORCE left alignment
+    context.textBaseline = "top"; // Ensure it draws from the top
     
     // Current Score
-    context.fillText(Math.floor(score), 20, 45);
+    context.fillText(Math.floor(score), 20, 20);
     
-    // Best Score - pulling the most recent value
+    // Best Score
     context.font = "12px 'Press Start 2P', cursive";
-    context.fillText("BEST: " + bestScore, 20, 75);
+    context.fillText("BEST: " + bestScore, 20, 50);
+    context.restore(); // Restore state so it doesn't mess with other drawings
 }
 
 function drawGameOver() {
-    // 1. Darken the background slightly for focus
-    context.fillStyle = "rgba(0, 0, 0, 0.4)";
+    context.save();
+    context.fillStyle = "rgba(0, 0, 0, 0.6)"; // Darker overlay
     context.fillRect(0, 0, boardWidth, boardHeight);
 
-    // 2. Game Over Text
     context.fillStyle = "white";
-    context.font = "24px 'Press Start 2P', cursive";
     context.textAlign = "center";
-    context.fillText("GAME OVER", boardWidth / 2, 220);
-
-    // 3. Stats Box
-    context.font = "16px 'Press Start 2P', cursive";
-    context.fillText("SCORE: " + Math.floor(score), boardWidth / 2, 280);
-    context.fillText("BEST: " + bestScore, boardWidth / 2, 320);
-
-    // 4. THE RESTART ICON/BUTTON
-    let btnX = boardWidth / 2 - 80;
-    let btnY = 360;
-    let btnW = 160;
-    let btnH = 50;
-
-    // Draw Button Border/Shadow
-    context.fillStyle = "#543847"; // Dark brown border
-    context.fillRect(btnX, btnY, btnW, btnH);
     
-    // Draw Button Face
-    context.fillStyle = "#e86101"; // Classic orange
-    context.fillRect(btnX + 4, btnY - 4, btnW - 8, btnH);
+    context.font = "24px 'Press Start 2P', cursive";
+    context.fillText("GAME OVER", boardWidth / 2, boardHeight / 2 - 50);
 
-    // Draw Icon (The Emoji/Symbol)
-    context.fillStyle = "white";
-    context.font = "20px Arial"; // Using Arial for the emoji to ensure it renders
-    context.fillText("↻ RESTART", boardWidth / 2, 392);
+    context.font = "16px 'Press Start 2P', cursive";
+    context.fillText("SCORE: " + Math.floor(score), boardWidth / 2, boardHeight / 2);
+    context.fillText("BEST: " + bestScore, boardWidth / 2, boardHeight / 2 + 40);
 
-    context.textAlign = "left"; // Reset alignment for other functions
+    // Restart Button Drawing... (Keep your existing button code here)
+    
+    context.restore();
 }
-
 // function to handle the transition
 function startGame() {
     gameStarted = true;
@@ -285,4 +269,5 @@ function detectedCollision(a, b) {
            a.y < b.y + b.height &&
            a.y + a.height > b.y;
 }
+
 

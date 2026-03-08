@@ -176,16 +176,12 @@ function handleInput(e) {
 function triggerGameOver() {
     if (!gameOver) {
         gameOver = true;
-        hitSound.play();
+       // hitSound.play();
         dieSound.play();
         bgm.pause();
-
-        let currentSessionScore = Math.floor(score);
-        
-        // Use a strict check to ensure we are comparing numbers
-        if (currentSessionScore > bestScore) {
-            bestScore = currentSessionScore; // Update the global variable IMMEDIATELY
-            localStorage.setItem("bestScore", bestScore); // Save to GitHub Pages domain storage
+        if (Math.floor(score) > bestScore) {
+            bestScore = Math.floor(score);
+            localStorage.setItem("bestScore", bestScore);
         }
     }
 }
@@ -218,40 +214,55 @@ function placePipes() {
 }
 
 function drawScore() {
-    context.save(); // Save the current state
     context.fillStyle = "white";
     context.font = "20px 'Press Start 2P', cursive";
-    context.textAlign = "left"; // FORCE left alignment
-    context.textBaseline = "top"; // Ensure it draws from the top
     
     // Current Score
-    context.fillText(Math.floor(score), 20, 20);
+    context.fillText(Math.floor(score), 20, 45);
     
-    // Best Score
+    // Best Score (added this)
     context.font = "12px 'Press Start 2P', cursive";
-    context.fillText("BEST: " + bestScore, 20, 50);
-    context.restore(); // Restore state so it doesn't mess with other drawings
+    context.fillText("BEST: " + bestScore, 20, 75);
 }
 
 function drawGameOver() {
-    context.save();
-    context.fillStyle = "rgba(0, 0, 0, 0.6)"; // Darker overlay
+    // 1. Darken the background slightly for focus
+    context.fillStyle = "rgba(0, 0, 0, 0.4)";
     context.fillRect(0, 0, boardWidth, boardHeight);
 
+    // 2. Game Over Text
     context.fillStyle = "white";
-    context.textAlign = "center";
-    
     context.font = "24px 'Press Start 2P', cursive";
-    context.fillText("GAME OVER", boardWidth / 2, boardHeight / 2 - 50);
+    context.textAlign = "center";
+    context.fillText("GAME OVER", boardWidth / 2, 220);
 
+    // 3. Stats Box
     context.font = "16px 'Press Start 2P', cursive";
-    context.fillText("SCORE: " + Math.floor(score), boardWidth / 2, boardHeight / 2);
-    context.fillText("BEST: " + bestScore, boardWidth / 2, boardHeight / 2 + 40);
+    context.fillText("SCORE: " + Math.floor(score), boardWidth / 2, 280);
+    context.fillText("BEST: " + bestScore, boardWidth / 2, 320);
 
-    // Restart Button Drawing... (Keep your existing button code here)
+    // 4. THE RESTART ICON/BUTTON
+    let btnX = boardWidth / 2 - 80;
+    let btnY = 360;
+    let btnW = 160;
+    let btnH = 50;
+
+    // Draw Button Border/Shadow
+    context.fillStyle = "#543847"; // Dark brown border
+    context.fillRect(btnX, btnY, btnW, btnH);
     
-    context.restore();
+    // Draw Button Face
+    context.fillStyle = "#e86101"; // Classic orange
+    context.fillRect(btnX + 4, btnY - 4, btnW - 8, btnH);
+
+    // Draw Icon (The Emoji/Symbol)
+    context.fillStyle = "white";
+    context.font = "20px Arial"; // Using Arial for the emoji to ensure it renders
+    context.fillText("↻ RESTART", boardWidth / 2, 392);
+
+    context.textAlign = "left"; // Reset alignment for other functions
 }
+
 // function to handle the transition
 function startGame() {
     gameStarted = true;
@@ -269,5 +280,3 @@ function detectedCollision(a, b) {
            a.y < b.y + b.height &&
            a.y + a.height > b.y;
 }
-
-
